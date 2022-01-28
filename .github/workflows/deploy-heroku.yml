@@ -1,0 +1,21 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy docker container to Heroku
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "blood-cells-detection-app" #Must be unique in Heroku
+          heroku_email: "ms.nina.smirnova@gmail.com"
+          branch: deploy
+          usedocker: true
